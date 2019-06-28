@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
 class FoodList extends Component {
   state = {
@@ -38,14 +38,16 @@ class FoodList extends Component {
     });
 
     return (
-      <StyledFoodList>
-        {dataArray.map(item => (
-          <Row item={item} key={item.id} />
-        ))}
+      <div style={{ margin: "30px" }}>
+        <StyledFoodList>
+          {dataArray.map(item => (
+            <Row item={item} key={item.id} />
+          ))}
+        </StyledFoodList>
         <StyledDataButton onClick={() => this.printData(data)}>
           Print Data to Console
         </StyledDataButton>
-      </StyledFoodList>
+      </div>
     );
   }
 }
@@ -100,12 +102,51 @@ const StyledFoodList = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  margin: 30px;
 `;
 
+// styles from Radix
 const StyledDataButton = styled.button`
-  border-radius: 100px;
-  margin: 10px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid;
+  border-radius: 0.1875rem;
+  cursor: pointer;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-weight: 500;
+  outline: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  position: relative;
+  text-align: center;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: hsl(208, 32%, 99%);
+  border-color: hsl(208, 20%, 86%);
+  color: hsl(208, 12%, 46%);
+  font-size: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  height: 35px;
+  min-width: 35px;
+  line-height: 1;
+  :hover {
+    background-color: #f5f7f9;
+  }
 `;
 
 const StyledRow = styled.div`
@@ -113,6 +154,15 @@ const StyledRow = styled.div`
   justify-content: space-between;
   padding: 10px;
   text-transform: capitalize;
+  && {
+    margin-left: ${({ isDelicious }) => (isDelicious ? "30px" : "0px")};
+    transition: background 0.2s, margin-left 0.2s;
+    background: ${({ isHealthy }) => (isHealthy ? "#83C29B" : "#eaedf2")};
+  }
+  label {
+    font-size: 0.9rem;
+    margin-right: 4px;
+  }
   .disable-selection {
     -moz-user-select: none; /* Firefox */
     -ms-user-select: none; /* Internet Explorer */
@@ -125,11 +175,6 @@ const StyledRow = styled.div`
   }
   :last-of-type {
     border-radius: 0 0 4px 4px;
-  }
-  && {
-    margin-left: ${({ isDelicious }) => (isDelicious ? "30px" : "0px")};
-    transition: background 0.2s, margin-left 0.2s;
-    background: ${({ isHealthy }) => (isHealthy ? "#83C29B" : "#eaedf2")};
   }
 `;
 
