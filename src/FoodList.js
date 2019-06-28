@@ -51,8 +51,8 @@ class FoodList extends Component {
 }
 
 const Row = ({ item }) => {
-  const [isDelicious, toggleIsDelicious] = useState(false);
-  const [isHealthy, toggleIsHealthy] = useState(false);
+  const [isDelicious, toggleIsDelicious] = useState(item.isDelicious);
+  const [isHealthy, toggleIsHealthy] = useState(item.isHealthy);
   // console.log("isDelicious", isDelicious);
   // console.log("isHealthy", isHealthy);
 
