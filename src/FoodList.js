@@ -99,7 +99,7 @@ const Row = ({ item }) => {
 const StyledFoodList = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 0.1875rem;
 `;
 
 // styles from Radix
@@ -133,8 +133,8 @@ const StyledDataButton = styled.button`
   white-space: nowrap;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: hsl(208, 32%, 99%);
-  border-color: hsl(208, 20%, 86%);
-  color: hsl(208, 12%, 46%);
+  border-color: hsl(208, 76%, 68%);
+  color: hsl(208, 82%, 45%);
   font-size: 15px;
   padding-left: 15px;
   padding-right: 15px;
@@ -143,7 +143,7 @@ const StyledDataButton = styled.button`
   min-width: 35px;
   line-height: 1;
   :hover {
-    background-color: #f5f7f9;
+    border-color: hsl(208, 98%, 50%);
   }
 `;
 
@@ -170,10 +170,10 @@ const StyledRow = styled.div`
     -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
   }
   :first-child {
-    border-radius: 4px 4px 0 0;
+    border-radius: 0.1875rem 0.1875rem 0 0;
   }
   :last-of-type {
-    border-radius: 0 0 4px 4px;
+    border-radius: 0 0 0.1875rem 0.1875rem;
   }
 `;
 
