@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component, useState } from "react";
+import styled, { keyframes } from "styled-components";
 
 class FoodList extends Component {
   state = {
@@ -42,26 +42,54 @@ class FoodList extends Component {
         {dataArray.map(item => (
           <Row item={item} key={item.id} />
         ))}
-        <button onClick={() => this.printData(data)}>
+        <StyledDataButton onClick={() => this.printData(data)}>
           Print Data to Console
-        </button>
+        </StyledDataButton>
       </StyledFoodList>
     );
   }
 }
 
 const Row = ({ item }) => {
+  const [isDelicious, toggleIsDelicious] = useState(false);
+  const [isHealthy, toggleIsHealthy] = useState(false);
+  // console.log("isDelicious", isDelicious);
+  // console.log("isHealthy", isHealthy);
+
+  const inputIdDelicious = `${item.id}-delicious`;
+  const inputIdHealthy = `${item.id}-healthy`;
+
   return (
-    <StyledRow>
-      <div>{item.label}</div>
-      <div>
+    <StyledRow
+      isDelicious={isDelicious}
+      isHealthy={isHealthy}
+      className="disable-selection"
+    >
+      <span>{item.label}</span>
+      <div
+        style={{ display: "flex", flexDirection: "row", alignSelf: "flex-end" }}
+      >
         <div>
-          <input type="checkbox" label="Is Delicious" />
-          <label htmlFor="isDelicious">Is Delicious</label>
+          <input
+            type="checkbox"
+            id={inputIdDelicious}
+            checked={isDelicious}
+            onChange={() => toggleIsDelicious(!isDelicious)}
+          />
+          <label htmlFor={inputIdDelicious} className="disable-selection">
+            Is Delicious
+          </label>
         </div>
         <div>
-          <input type="checkbox" id="isHealthy" />
-          <label htmlFor="isHealthy">Is Healthy</label>
+          <input
+            type="checkbox"
+            id={inputIdHealthy}
+            checked={isHealthy}
+            onChange={() => toggleIsHealthy(!isHealthy)}
+          />
+          <label htmlFor={inputIdHealthy} className="disable-selection">
+            Is Healthy
+          </label>
         </div>
       </div>
     </StyledRow>
@@ -71,17 +99,38 @@ const Row = ({ item }) => {
 const StyledFoodList = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid blue;
-  border-radius: 3px;
+  border-radius: 8px;
   margin: 30px;
+`;
+
+const StyledDataButton = styled.button`
+  border-radius: 100px;
+  margin: 10px;
 `;
 
 const StyledRow = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 4px;
-  background: #eaedf0;
+  padding: 10px;
   text-transform: capitalize;
+  .disable-selection {
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+  }
+  :first-child {
+    border-radius: 4px 4px 0 0;
+  }
+  :last-of-type {
+    border-radius: 0 0 4px 4px;
+  }
+  && {
+    margin-left: ${({ isDelicious }) => (isDelicious ? "30px" : "0px")};
+    transition: background 0.2s, margin-left 0.2s;
+    background: ${({ isHealthy }) => (isHealthy ? "#83C29B" : "#eaedf2")};
+  }
 `;
 
 export default FoodList;
