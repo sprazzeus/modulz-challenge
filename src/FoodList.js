@@ -1,30 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
-const FoodList = props => {
-  const { data } = props;
-  const dataArray = Object.keys(data).map(key => {
-    return {
-      id: key,
-      ...data[key],
-    };
-  });
+class FoodList extends Component {
+  state = {
+    data: {
+      e5d9d9f5: {
+        label: "ice cream",
+        isDelicious: true,
+        isHealthy: false,
+      },
+      a9ba692b: {
+        label: "pizza",
+        isDelicious: true,
+        isHealthy: false,
+      },
+      ze128a47: {
+        label: "spinach",
+        isDelicious: false,
+        isHealthy: true,
+      },
+    },
+  };
 
-  const printData = data => {
+  printData = data => {
     console.group("Current Food Data");
     console.log(data);
     console.groupEnd();
   };
 
-  return (
-    <StyledFoodList>
-      {dataArray.map(item => (
-        <Row item={item} />
-      ))}
-      <button onClick={() => printData(data)}>Print Data to Console</button>
-    </StyledFoodList>
-  );
-};
+  render() {
+    const { data } = this.state;
+    const dataArray = Object.keys(data).map(key => {
+      return {
+        id: key,
+        ...data[key],
+      };
+    });
+
+    return (
+      <StyledFoodList>
+        {dataArray.map(item => (
+          <Row item={item} key={item.id} />
+        ))}
+        <button onClick={() => this.printData(data)}>
+          Print Data to Console
+        </button>
+      </StyledFoodList>
+    );
+  }
+}
 
 const Row = ({ item }) => {
   return (
