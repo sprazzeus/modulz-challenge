@@ -23,7 +23,7 @@ class FoodList extends Component {
   };
 
   printData = data => {
-    console.group("Current Food Data");
+    console.group("Current Food Data 📋");
     console.log(data);
     console.groupEnd();
   };
@@ -39,6 +39,7 @@ class FoodList extends Component {
 
     return (
       <div style={{ margin: "30px" }}>
+        <h1>Food</h1>
         <StyledFoodList>
           {dataArray.map(item => (
             <Row item={item} key={item.id} />
@@ -153,6 +154,7 @@ const StyledRow = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  color: "#333333";
   text-transform: capitalize;
   && {
     margin-left: ${({ isDelicious }) => (isDelicious ? "30px" : "0px")};
